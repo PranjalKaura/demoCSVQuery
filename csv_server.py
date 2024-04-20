@@ -10,19 +10,21 @@ app = Flask(__name__)
 #redirect for query
 @app.route("/query/<query>")
 def queryFunc(query):
-    result = DATA.query(query)
+    result = DATA.query(query) #run query on dataframe
     return render_template('query.html',  tables=[result.to_html()], titles=[result.columns.values])
 
 @app.route('/', methods=['GET', 'POST']) 
 def index(): 
     if request.method == 'POST': 
-        query = ""
+        query = "" #initialize query string
 
+        #drop down selector queries
         weather = request.form.get('weather')
         query += 'WEATHER == "' + weather + '"'
         stn = request.form.get('stn')
         query += ' and ' + 'STN_NAME == "' + stn + '"'
 
+        #comparator query
         query = parseQuery(query, request.form, 'DD')
         query = parseQuery(query, request.form, 'MONTH')
         query = parseQuery(query, request.form, 'GGGG')
@@ -40,9 +42,9 @@ def index():
     return render_template('home.html', weathers = parsedOutput['uniqueWeather'], stations = parsedOutput['stnUniqueName'], comparators = parsedOutput["comparators"]) 
 
 def parseQuery(query, form, columnName):
-    comparator = form.get('comparator' + columnName)
-    val = form.get(columnName)
-    if comparator != ' ':
+    comparator = form.get('comparator' + columnName) #get the comparator sign
+    val = form.get(columnName) #get the value for comparison
+    if comparator != ' ': #if comparator is empty, ignore current column
         query += ' and ' + columnName + comparator + val
     return query
 
@@ -63,11 +65,11 @@ def parseData():
 
 if __name__ == '__main__':
 
-    parser = ArgumentParser(
-                    prog='csvParser',
+    parser = ArgumentParser(prog='csvParser',
                     description='Web based querying of csv file')
-    parser.add_argument('csv_file', nargs='*', help='The csv file that the app will query', default=['ADM.csv', 'AFA.csv', 'GWL.csv'])
+    parser.add_argument('csv_file', nargs='*', help='The csv file that the app will query', 
+                        default=['ADM.csv', 'AFA.csv', 'GWL.csv'])
     args = parser.parse_args()
-    DATA = pd.concat((pd.read_csv(f) for f in args.csv_file), ignore_index=True)
+    DATA = pd.concat((pd.read_csv(f) for f in args.csv_file), ignore_index=True) #concatenate all csv dataframes into one
     app.run()
 
