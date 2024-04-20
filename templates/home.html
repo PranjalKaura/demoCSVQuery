@@ -1,0 +1,91 @@
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Document</title> 
+    <link rel="stylesheet" type="text/css" href="static/stylesheets/main.css" />
+</head> 
+<body> 
+    <div id="header">
+        <div>
+          <img id="logo" src="/static/images/airportPhoto.jpg" width="384" height="128"/>
+        </div>
+        <div id="title">
+          Query a CSV File with Pandas and Flask
+        </div>
+    </div>
+
+    <form method="POST"> 
+        <span>
+            <h3>Weather</h3>
+            <select name="weather" method="GET" action="/">
+                {% for weather in weathers %}
+                    <option value="{{weather}}" SELECTED>{{weather}}</option>"
+                {% endfor %}
+            </select>
+            <h3>Station</h3>
+            <select name="stn" method="GET" action="/">
+                {% for stn in stations %}
+                    <option value="{{stn}}" SELECTED>{{stn}}</option>"
+                {% endfor %}
+            </select>
+
+            <h3>DD</h3>
+            <select name="comparatorDD" method="GET" action="/">
+                {% for comparator in comparators %}
+                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
+                {% endfor %}
+            </select>
+            <input type="number" name="DD" min="0" max="300" value="10">
+
+            <h3>MONTH</h3>
+            <select name="comparatorMONTH" method="GET" action="/">
+                {% for comparator in comparators %}
+                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
+                {% endfor %}
+            </select>
+            <input type="number" name="MONTH" min="0" max="12" value="6">
+        </span>
+        <span>
+            <h3>GGGG</h3>
+            <select name="comparatorGGGG" method="GET" action="/">
+                {% for comparator in comparators %}
+                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
+                {% endfor %}
+            </select>
+            <input type="number" name="GGGG" min="0" max="3000" value="100">
+            
+            <h3>FF</h3>
+            <select name="comparatorFF" method="GET" action="/">
+                {% for comparator in comparators %}
+                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
+                {% endfor %}
+            </select>
+            <input type="number" name="FF" min="0" max="20" value="1">
+
+            <h3>VIS</h3>
+            <select name="comparatorVIS" method="GET" action="/">
+                {% for comparator in comparators %}
+                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
+                {% endfor %}
+            </select>
+            <input type="number" name="VIS" min="0" max="4000" value="500">
+
+            <h3>DB</h3>
+            <select name="comparatorDB" method="GET" action="/">
+                {% for comparator in comparators %}
+                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
+                {% endfor %}
+            </select>
+            <input type="number" name="DB" min="0" max="20" value="5">
+        </span>
+        <input type="submit" value="Submit"> 
+    </form> 
+
+    
+
+</body> 
+</html>
