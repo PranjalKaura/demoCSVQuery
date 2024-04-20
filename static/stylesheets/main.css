@@ -52,3 +52,12 @@ span {
   display: flex;
   justify-content: space-between;
 }
+
+a.button {
+  padding: 1px 6px;
+  border: 1px outset buttonborder;
+  border-radius: 10px;
+  color: darkgreen;
+  background-color: papayawhip;
+  text-decoration: none;
+}

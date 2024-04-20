@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Query Resolved</title>
+    <link rel="stylesheet" type="text/css" href="static/stylesheets/main.css" />
 </head>
 <body>
-    <button>Home</button>
-{% for table in tables %}
-            {{titles[loop.index]}}
-            {{ table|safe }}
-{% endfor %}
+    <a href="http://127.0.0.1:5000" class="button">Go Home</a>
+    {% for table in tables %}
+                {{titles[loop.index]}}
+                {{ table|safe }}
+    {% endfor %}
 </body>
 </html>
