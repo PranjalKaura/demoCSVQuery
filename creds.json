@@ -1,0 +1,16 @@
+{
+      "creds": [
+            {
+                  "username": "pkaura",
+                  "password": "pranjal"
+            },
+            {
+                  "username": "admin",
+                  "password": "admin"
+            },
+            {
+                  "username": "waba",
+                  "password": "laba"
+            }
+      ]
+}

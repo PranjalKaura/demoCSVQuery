@@ -37,12 +37,13 @@
             {{ input('DATE', 0, 31, 10) }}
             {{ input('MONTH', 1, 12, 6) }}
             {{ input('TIME', 0, 3000, 100) }}
-            {{ input('WIND_SPEED', 0, 20, 1) }}
+            {{ input('WIND SPEED', 0, 20, 1) }}
             {{ input('VIS', 0, 4000, 500) }}
             {{ input('DB', 0, 100, 5) }}
-            {{ input('WIND_DIR', 0, 300, 60)}}
+            {{ input('WIND DIR', 0, 300, 60)}}
 
-        <input type="submit" value="Submit" class = "px-4 py-2 bg-warning text-white rounded"> 
+        <input type="submit" value="Submit" class = "d-inline px-4 py-2 bg-warning text-white rounded">
+        <a href="{{url_for('logout')}}" class="btn btn-danger btn-lg">Logout</a>
     </form> 
 
 {% endblock content%}
