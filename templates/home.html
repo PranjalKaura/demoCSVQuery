@@ -1,91 +1,48 @@
+{% extends 'layout.html' %}
 
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Document</title> 
-    <link rel="stylesheet" type="text/css" href="static/stylesheets/main.css" />
-</head> 
-<body> 
-    <div id="header">
-        <div>
-          <img id="logo" src="/static/images/airportPhoto.jpg" width="384" height="128"/>
-        </div>
-        <div id="title">
-          Query a CSV File with Pandas and Flask
-        </div>
+<!-- Macro for creation of input elements -->
+{% macro input(name, min, max, def, value='', type='text', size=20) -%}
+    <h3 class="d-inline p-2 mr-2 bg-dark text-white rounded">{{name}}</h3>
+    <select name="comparator{{name}}" method="GET" action="/">
+        {% for comparator in comparators %}
+            <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
+        {% endfor %}
+    </select>
+    <input class = "p-2 ml-2 bg-info text-white rounded" type="number" name="{{name}}" min="{{min}}" max="{{max}}" value="{{def}}">
+    <br><br>
+{%- endmacro %}
+
+{% block content %}
+    <div class="d-flex align-items-center">
+        <img id="logo" src="/static/images/airportPhoto.jpg" width="384" height="128"/>
+        <h1 class="display-4">Query a CSV File with Pandas and Flask</h1>
     </div>
 
     <form method="POST"> 
-        <span>
-            <h3>Weather</h3>
-            <select name="weather" method="GET" action="/">
+            <br>
+            <h3 class="d-inline p-2 mr-2 bg-dark text-white rounded">WEATHER</h3>
+            <select class = "p-2 ml-2 bg-info text-white rounded" name="weather" method="GET" action="/">
                 {% for weather in weathers %}
                     <option value="{{weather}}" SELECTED>{{weather}}</option>"
                 {% endfor %}
-            </select>
-            <h3>Station</h3>
-            <select name="stn" method="GET" action="/">
+            </select><br><br>
+
+            <h3 class="d-inline p-2 mr-2 bg-dark text-white rounded">STATION</h3>
+            <select class = "p-2 ml-2 bg-info text-white rounded" name="stn" method="GET" action="/">
                 {% for stn in stations %}
                     <option value="{{stn}}" SELECTED>{{stn}}</option>"
                 {% endfor %}
-            </select>
+            </select><br><br>
 
-            <h3>DD</h3>
-            <select name="comparatorDD" method="GET" action="/">
-                {% for comparator in comparators %}
-                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
-                {% endfor %}
-            </select>
-            <input type="number" name="DD" min="0" max="300" value="10">
+            {{ input('DATE', 0, 31, 10) }}
+            {{ input('MONTH', 1, 12, 6) }}
+            {{ input('TIME', 0, 3000, 100) }}
+            {{ input('WIND_SPEED', 0, 20, 1) }}
+            {{ input('VIS', 0, 4000, 500) }}
+            {{ input('DB', 0, 100, 5) }}
+            {{ input('WIND_DIR', 0, 300, 60)}}
 
-            <h3>MONTH</h3>
-            <select name="comparatorMONTH" method="GET" action="/">
-                {% for comparator in comparators %}
-                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
-                {% endfor %}
-            </select>
-            <input type="number" name="MONTH" min="0" max="12" value="6">
-        </span>
-        <span>
-            <h3>GGGG</h3>
-            <select name="comparatorGGGG" method="GET" action="/">
-                {% for comparator in comparators %}
-                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
-                {% endfor %}
-            </select>
-            <input type="number" name="GGGG" min="0" max="3000" value="100">
-            
-            <h3>FF</h3>
-            <select name="comparatorFF" method="GET" action="/">
-                {% for comparator in comparators %}
-                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
-                {% endfor %}
-            </select>
-            <input type="number" name="FF" min="0" max="20" value="1">
-
-            <h3>VIS</h3>
-            <select name="comparatorVIS" method="GET" action="/">
-                {% for comparator in comparators %}
-                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
-                {% endfor %}
-            </select>
-            <input type="number" name="VIS" min="0" max="4000" value="500">
-
-            <h3>DB</h3>
-            <select name="comparatorDB" method="GET" action="/">
-                {% for comparator in comparators %}
-                    <option value="{{comparator}}" SELECTED>{{comparator}}</option>"
-                {% endfor %}
-            </select>
-            <input type="number" name="DB" min="0" max="20" value="5">
-        </span>
-        <input type="submit" value="Submit"> 
+        <input type="submit" value="Submit" class = "px-4 py-2 bg-warning text-white rounded"> 
     </form> 
 
-    
-
-</body> 
-</html>
+{% endblock content%}

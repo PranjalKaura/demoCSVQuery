@@ -25,12 +25,13 @@ def index():
         query += ' and ' + 'STN_NAME == "' + stn + '"'
 
         #comparator query
-        query = parseQuery(query, request.form, 'DD')
+        query = parseQuery(query, request.form, 'DATE')
         query = parseQuery(query, request.form, 'MONTH')
-        query = parseQuery(query, request.form, 'GGGG')
-        query = parseQuery(query, request.form, 'FF')
+        query = parseQuery(query, request.form, 'TIME')
+        query = parseQuery(query, request.form, 'WIND_SPEED')
         query = parseQuery(query, request.form, 'VIS')
         query = parseQuery(query, request.form, 'DB')
+        query = parseQuery(query, request.form, 'WIND_DIR')
 
         # Print the query in terminal for verification 
         print(query) 
@@ -53,13 +54,6 @@ def parseData():
     parsedOutput['uniqueWeather'] = DATA.WEATHER.unique()
     parsedOutput['stnUniqueName'] = DATA.STN_NAME.unique()
     parsedOutput['comparators'] = ['>', '<', '==', ' ']
-    # parsedOutput.monthUnique = DATA.MONTH.unique()
-    # parsedOutput.ddUnique = DATA.DD.unique()
-    # parsedOutput.ggggUnique = DATA.GGGG.unique()
-    # parsedOutput.dddUnique = DATA.DDD.unique()
-    # parsedOutput.ffUnique = DATA.FF.unique()
-    # parsedOutput.visUnique = DATA.VIS.unique()
-    # parsedOutput.dbUnique = DATA.DB.unique()
 
     return parsedOutput
 
@@ -71,5 +65,6 @@ if __name__ == '__main__':
                         default=['ADM.csv', 'AFA.csv', 'GWL.csv'])
     args = parser.parse_args()
     DATA = pd.concat((pd.read_csv(f) for f in args.csv_file), ignore_index=True) #concatenate all csv dataframes into one
-    app.run()
+    DATA = DATA.rename(columns={"DD": "DATE", "GGGG": "TIME", "FF":"WIND_SPEED", "DDD":"WIND_DIR"})#rename certain columns for web UI
+    app.run(debug = True)
 
